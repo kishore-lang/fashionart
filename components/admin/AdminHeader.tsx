@@ -73,11 +73,21 @@ export function AdminHeader({ adminName, adminEmail }: AdminHeaderProps) {
 
         {/* User Badge & Actions */}
         <div className="flex items-center gap-3 sm:gap-4">
-          <div className="text-right hidden sm:block">
-            <div className="text-xs font-semibold text-[#FBF6EE]">
-              {adminName}
+          <div className="flex items-center gap-2.5">
+            <div className="w-9 h-9 rounded-full overflow-hidden border-2 border-[#E8B520] shadow-sm relative shrink-0">
+              <Image
+                src="/images/founder_saree.png"
+                alt="Suguna Shanmugam"
+                fill
+                className="object-cover object-top"
+              />
             </div>
-            <div className="text-[11px] text-[#E8B520]">{adminEmail}</div>
+            <div className="text-right hidden sm:block">
+              <div className="text-xs font-semibold text-[#FBF6EE]">
+                {adminName}
+              </div>
+              <div className="text-[11px] text-[#E8B520]">{adminEmail}</div>
+            </div>
           </div>
 
           <Link

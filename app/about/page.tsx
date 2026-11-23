@@ -121,8 +121,8 @@ export default function AboutPage() {
             <div className="lg:col-span-5 relative">
               <div className="aspect-[4/5] rounded-2xl overflow-hidden shadow-xl border-4 border-white relative">
                 <Image
-                  src="/images/client_founder.png"
-                  alt="Suguna Shanmugam"
+                  src="/images/founder_saree.png"
+                  alt="Suguna Shanmugam - Founder & Managing Director"
                   fill
                   className="object-cover object-top"
                   priority
