@@ -89,58 +89,53 @@ export const SEED_GALLERY: GallerySeedItem[] = [
     isInstagramPost: true,
   },
   {
-    id: "g1",
-    imageUrl: "https://images.unsplash.com/photo-1617627143750-d86bc21e42bb?auto=format&fit=crop&w=1200&q=80",
-    category: "Aari Embroidery",
-    caption: "Heavy bridal silk blouse featuring intricate zardozi wire and 3D organza cutwork embroidery.",
-  },
-  {
-    id: "g2",
-    imageUrl: "https://images.unsplash.com/photo-1558769132-cb1aea458c5e?auto=format&fit=crop&w=1200&q=80",
-    category: "Student Fests",
-    caption: "Students drafting precision paper patterns during our annual practical workshop in Coimbatore.",
-  },
-  {
-    id: "g3",
-    imageUrl: "https://images.unsplash.com/photo-1539109136881-3be0616acf4b?auto=format&fit=crop&w=1200&q=80",
-    category: "Couture Gowns",
-    caption: "Full 360-degree circular umbrella gown crafted from an upcycled heirloom Kanjivaram silk saree.",
-  },
-  {
-    id: "g4",
-    imageUrl: "https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&w=1200&q=80",
-    category: "Terracotta",
-    caption: "Handcrafted terracotta jewellery set featuring antique gold finish and peacock pendant.",
-  },
-  {
-    id: "g5",
-    imageUrl: "https://images.unsplash.com/photo-1528459801416-a9e53bbf4e17?auto=format&fit=crop&w=1200&q=80",
+    id: "g-founder-couture",
+    imageUrl: "/images/founder_saree.png",
     category: "Bridal Blouses",
-    caption: "Deep-neck designer blouse with zero-wrinkle armhole drafting and padded princess cut silhouette.",
+    caption:
+      "Royal hand-embroidered blouse with heritage mandala motif and metallic antique embellishments.",
   },
   {
-    id: "g6",
-    imageUrl: "https://images.unsplash.com/photo-1509631179647-0177331693ae?auto=format&fit=crop&w=1200&q=80",
-    category: "Couture Gowns",
-    caption: "Contemporary Indo-western gown with cancan volume flare, created for Fashion Art Fest runway.",
+    id: "g-master-tailoring",
+    imageUrl: "/images/courses/master-tailoring.jpg",
+    category: "Bridal Blouses",
+    caption:
+      "Boutique-standard bridal blouse drafting with flawless seam finishing and zero-wrinkle fitting.",
   },
   {
-    id: "g7",
-    imageUrl: "https://images.unsplash.com/photo-1544816155-12df9643f363?auto=format&fit=crop&w=1200&q=80",
+    id: "g-advanced-aari",
+    imageUrl: "/images/courses/advanced-aari.jpg",
     category: "Aari Embroidery",
-    caption: "79-stitch sample hoop display showcasing fine bead work, chain variations, and French knots.",
+    caption:
+      "79-stitch bridal Aari embroidery showcase featuring gold zardozi wire and cutdana bead padding.",
   },
   {
-    id: "g8",
-    imageUrl: "https://images.unsplash.com/photo-1512436991641-6745cdb1723f?auto=format&fit=crop&w=1200&q=80",
-    category: "Student Fests",
-    caption: "Yaadhumaagi Nirpaval award ceremony recognizing female students who established home boutiques.",
+    id: "g-hand-embroidery",
+    imageUrl: "/images/courses/hand-embroidery.jpg",
+    category: "Aari Embroidery",
+    caption:
+      "Timeless heritage hand embroidery and metallic zardozi detailing on rich silk velvet.",
   },
   {
-    id: "g9",
-    imageUrl: "https://images.unsplash.com/photo-1605100804763-247f67b3557e?auto=format&fit=crop&w=1200&q=80",
+    id: "g-designer-patterns",
+    imageUrl: "/images/courses/designer-patterns.jpg",
+    category: "Couture Gowns",
+    caption:
+      "High-fashion architectural silhouette gown with volume flare and structured bodice.",
+  },
+  {
+    id: "g-terracotta-jewellery",
+    imageUrl: "/images/courses/terracotta-jewellery.jpg",
     category: "Terracotta",
-    caption: "Lightweight hand-rolled terracotta jhumkas with water-resistant acrylic enamel glazing.",
+    caption:
+      "Handcrafted terracotta designer necklace set with antique acrylic glazing and hollow beads.",
+  },
+  {
+    id: "g-diploma-fashion",
+    imageUrl: "/images/courses/diploma-fashion.jpg",
+    category: "Student Fests",
+    caption:
+      "Student runway sketching and live mannequin draping during our annual design showcase.",
   },
 ];
 

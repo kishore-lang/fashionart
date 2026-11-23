@@ -120,7 +120,7 @@ export async function getFeaturedCourses(): Promise<CourseData[]> {
 }
 
 /**
- * Fetch gallery items with optional category filtering
+ * Fetch gallery items with optional category filtering (Original images only)
  */
 export async function getGalleryItems(
   category?: string
@@ -133,24 +133,28 @@ export async function getGalleryItems(
         .orderBy(desc(schema.gallery.createdAt));
 
       if (rows && rows.length > 0) {
-        let items = rows.map((r) => ({
-          id: r.id,
-          imageUrl: r.imageUrl,
-          category: r.category as GallerySeedItem["category"],
-          caption: r.caption || "",
-        }));
+        let items = rows
+          .filter((r) => !r.imageUrl.includes("unsplash.com"))
+          .map((r) => ({
+            id: r.id,
+            imageUrl: r.imageUrl,
+            category: r.category as GallerySeedItem["category"],
+            caption: r.caption || "",
+          }));
 
-        if (category && category !== "All") {
-          items = items.filter((i) => i.category === category);
+        if (items.length > 0) {
+          if (category && category !== "All") {
+            items = items.filter((i) => i.category === category);
+          }
+          return items;
         }
-        return items;
       }
     } catch (err) {
       console.warn("Neon DB query for gallery failed:", err);
     }
   }
 
-  let items = SEED_GALLERY;
+  let items = SEED_GALLERY.filter((i) => !i.imageUrl.includes("unsplash.com"));
   if (category && category !== "All") {
     items = items.filter((i) => i.category === category);
   }

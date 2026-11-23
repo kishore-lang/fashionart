@@ -114,32 +114,16 @@ export function Navbar() {
 
             {/* Action CTAs: Desktop */}
             <div className="hidden lg:flex items-center gap-3">
-              <Link
-                href="/admin"
-                className="text-xs uppercase tracking-wider font-semibold text-[#4A2511] hover:text-[#8F6C07] px-3 py-2 flex items-center gap-1.5 transition-colors border border-[#4A2511]/20 rounded-xl hover:border-[#4A2511] touch-manipulation"
-              >
-                <Shield className="w-3.5 h-3.5 text-[#E8B520]" />
-                <span>Admin</span>
-              </Link>
               <Link href="/courses">
                 <Button variant="gold" size="sm" className="gap-1.5 shadow-sm touch-manipulation">
                   <Sparkles className="w-3.5 h-3.5" />
-                  <span>Courses</span>
+                  <span>Explore Courses</span>
                 </Button>
               </Link>
             </div>
 
             {/* Mobile Hamburger Button */}
             <div className="flex items-center gap-2 lg:hidden">
-              <Link href="/admin">
-                <button
-                  type="button"
-                  className="px-2.5 py-2 rounded-xl text-xs font-semibold bg-white border border-[#4A2511]/15 text-[#4A2511] flex items-center gap-1 shadow-sm touch-manipulation"
-                >
-                  <Shield className="w-3.5 h-3.5 text-[#E8B520]" />
-                  <span>Admin</span>
-                </button>
-              </Link>
               <button
                 type="button"
                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
@@ -239,16 +223,6 @@ export function Navbar() {
                 <Button variant="gold" size="lg" className="w-full justify-center gap-2 text-base touch-manipulation">
                   <PhoneCall className="w-5 h-5" />
                   <span>Enquire for Admission</span>
-                </Button>
-              </Link>
-              <Link
-                href="/admin"
-                onClick={() => setMobileMenuOpen(false)}
-                className="block w-full"
-              >
-                <Button variant="outline" size="sm" className="w-full justify-center gap-2 text-xs text-[#7A6458] touch-manipulation">
-                  <Shield className="w-4 h-4 text-[#E8B520]" />
-                  <span>Open Director Admin Panel</span>
                 </Button>
               </Link>
             </div>

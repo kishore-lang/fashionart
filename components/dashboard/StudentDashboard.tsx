@@ -52,30 +52,29 @@ export function StudentDashboard({
 
   return (
     <div className="space-y-8">
-      {/* Role Navigation Bar */}
-      <div className="flex flex-wrap items-center justify-between gap-3 px-4 py-2.5 bg-white rounded-2xl border border-[#4A2511]/10 text-xs shadow-sm">
-        <div className="flex items-center gap-2 text-[#7A6458]">
-          <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-          <span>Authenticated as: <strong className="text-[#4A2511]">{studentName}</strong> (Student)</span>
+      {/* Student Authentication Bar */}
+      <div className="flex flex-wrap items-center justify-between gap-3 px-5 py-3 bg-white rounded-2xl border border-[#4A2511]/10 text-xs shadow-sm">
+        <div className="flex items-center gap-2.5 text-[#7A6458]">
+          <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse" />
+          <span>
+            Student Portal: <strong className="text-[#4A2511]">{studentName}</strong> ({studentEmail})
+          </span>
         </div>
         <div className="flex items-center gap-3">
-          <button
-            onClick={handleSwitchAdmin}
-            disabled={isPending}
-            className="flex items-center gap-1.5 font-semibold text-[#8F6C07] hover:text-[#4A2511] transition-colors"
+          <Link
+            href="/courses"
+            className="flex items-center gap-1 text-xs font-semibold text-[#8F6C07] hover:text-[#4A2511] transition-colors"
           >
-            <Shield className="w-3.5 h-3.5 text-[#E8B520]" />
-            <span>Switch to Admin Panel</span>
-          </button>
+            <BookOpen className="w-3.5 h-3.5 text-[#E8B520]" />
+            <span>Enrolled Courses</span>
+          </Link>
           <span className="text-[#4A2511]/20">•</span>
-          <button
-            onClick={handleLogout}
-            disabled={isPending}
-            className="flex items-center gap-1 text-[#7A6458] hover:text-red-600 transition-colors"
+          <Link
+            href="/sign-in"
+            className="flex items-center gap-1 font-semibold text-[#4A2511] hover:text-[#E8B520] transition-colors"
           >
-            <LogOut className="w-3.5 h-3.5" />
-            <span>Sign Out</span>
-          </button>
+            <span>Clerk Student Account</span>
+          </Link>
         </div>
       </div>
       {/* Student Welcome Banner */}

@@ -31,6 +31,13 @@
     position: relative;
   }
 
+  /* Instant Touch Responsiveness: eliminates 300ms mobile tap delay */
+  button, a, input, select, textarea, [role="button"] {
+    touch-action: manipulation;
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+  }
+
   h1, h2, h3, h4, h5, h6 {
     font-family: var(--font-playfair);
     letter-spacing: -0.01em;
