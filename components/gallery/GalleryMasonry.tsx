@@ -20,12 +20,13 @@ import { INSTAGRAM_REELS, InstagramReelItem } from "@/data/instagramContent";
 
 const CATEGORIES = [
   "All",
+  "Convocation",
+  "Fashion Show",
   "Student Ateliers",
   "Couture Gowns",
   "Bridal Blouses",
   "Aari Embroidery",
   "Terracotta",
-  "Student Fests",
 ];
 
 export function GalleryMasonry({

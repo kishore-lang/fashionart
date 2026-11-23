@@ -7,7 +7,9 @@ export interface GallerySeedItem {
     | "Aari Embroidery"
     | "Terracotta"
     | "Student Fests"
-    | "Student Ateliers";
+    | "Student Ateliers"
+    | "Convocation"
+    | "Fashion Show";
   caption: string;
   postUrl?: string;
   instagramHandle?: string;
@@ -37,6 +39,53 @@ export interface TestimonialSeedItem {
 }
 
 export const SEED_GALLERY: GallerySeedItem[] = [
+  // 1. Convocation Photos (Real Institute Graduation Events)
+  {
+    id: "g-convocation-1",
+    imageUrl: "/images/gallery/convocation-1.webp",
+    category: "Convocation",
+    caption:
+      "Annual Convocation Ceremony — Central Government Certified fashion couturiers receiving formal diplomas on stage.",
+  },
+  {
+    id: "g-convocation-2",
+    imageUrl: "/images/gallery/convocation-2.webp",
+    category: "Convocation",
+    caption:
+      "Graduation honours and student felicitations alongside founder Suguna Shanmugam in Coimbatore.",
+  },
+  {
+    id: "g-convocation-3",
+    imageUrl: "/images/gallery/convocation-3.webp",
+    category: "Convocation",
+    caption:
+      "Proud student designers celebrating certification milestones and graduation moments with faculty.",
+  },
+
+  // 2. Fashion Show Runway Photos (Real Grand Runway Events)
+  {
+    id: "g-fashion-show-1",
+    imageUrl: "/images/gallery/fashion-show-1.webp",
+    category: "Fashion Show",
+    caption:
+      "Grand Runway Fashion Show — student-designed haute couture gowns presented by professional runway models.",
+  },
+  {
+    id: "g-fashion-show-2",
+    imageUrl: "/images/gallery/fashion-show-2.webp",
+    category: "Fashion Show",
+    caption:
+      "Runway spotlight: intricate bridal silk drapes and bespoke festive garments crafted in our Coimbatore ateliers.",
+  },
+  {
+    id: "g-fashion-show-3",
+    imageUrl: "/images/gallery/fashion-show-3.webp",
+    category: "Fashion Show",
+    caption:
+      "Couture exhibition and designer ramp walk celebrating creativity, fit perfection, and women designers.",
+  },
+
+  // 3. Haute Couture Masterpieces & Student Ateliers
   {
     id: "g-piano-couture",
     imageUrl: "/images/gallery/piano-couture-gown.webp",
