@@ -6,6 +6,7 @@ import { FeaturedCourses } from "@/components/home/FeaturedCourses";
 import { StatsSection } from "@/components/home/StatsSection";
 import { WorldRecordBanner } from "@/components/home/WorldRecordBanner";
 import { FounderSection } from "@/components/home/FounderSection";
+import { InstagramReelsSection } from "@/components/home/InstagramReelsSection";
 import { EventsTimeline } from "@/components/home/EventsTimeline";
 import { TestimonialsSection } from "@/components/home/TestimonialsSection";
 
@@ -36,10 +37,13 @@ export default function HomePage() {
       {/* 8. Founder Section */}
       <FounderSection />
 
-      {/* 9. Events Timeline */}
+      {/* 9. Trending Instagram Reels & Alumni Boutiques */}
+      <InstagramReelsSection />
+
+      {/* 10. Events Timeline */}
       <EventsTimeline />
 
-      {/* 10. Testimonials Slider & Instagram Link */}
+      {/* 11. Testimonials Slider & Instagram Link */}
       <TestimonialsSection />
     </>
   );

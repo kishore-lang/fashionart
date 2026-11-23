@@ -206,6 +206,90 @@ export default function AboutPage() {
           </div>
         </div>
 
+        {/* Student Ateliers & Alumni Brands Showcase */}
+        <div className="space-y-10">
+          <div className="text-center max-w-2xl mx-auto space-y-3">
+            <div className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-[#E8B520]/15 text-[#8F6C07] text-xs font-semibold uppercase tracking-wider">
+              <Award className="w-3.5 h-3.5" />
+              <span>Real Student Success</span>
+            </div>
+            <h2 className="font-heading text-3xl sm:text-4xl font-bold text-[#4A2511]">
+              From Students to Boutique Owners
+            </h2>
+            <p className="text-sm sm:text-base text-[#7A6458]">
+              The true mark of Fashion Art Institute is our graduates who have
+              established thriving designer ateliers, bridal studios, and
+              boutiques across Tamil Nadu.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
+            {[
+              {
+                handle: "@unique_attire_by_saranya",
+                name: "Unique Attire",
+                founder: "Saranya",
+                url: "https://www.instagram.com/unique_attire_by_saranya/",
+              },
+              {
+                handle: "@varnam_by_kriti",
+                name: "Varnam",
+                founder: "Kriti",
+                url: "https://www.instagram.com/varnam_by_kriti/",
+              },
+              {
+                handle: "@zahrins_de_studio",
+                name: "De Studio",
+                founder: "Zahrin",
+                url: "https://www.instagram.com/zahrins_de_studio/",
+              },
+              {
+                handle: "@styled_by_kthi",
+                name: "Styled By Kthi",
+                founder: "Keerthi",
+                url: "https://www.instagram.com/styled_by_kthi/",
+              },
+              {
+                handle: "@renu_fashion_magic",
+                name: "Fashion Magic",
+                founder: "Renu",
+                url: "https://www.instagram.com/renu_fashion_magic/",
+              },
+              {
+                handle: "@dhiyash_designs",
+                name: "Dhiyash Designs",
+                founder: "Dhiyash",
+                url: "https://www.instagram.com/dhiyash_designs/",
+              },
+            ].map((alumni) => (
+              <a
+                key={alumni.handle}
+                href={alumni.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="bg-white p-5 rounded-2xl border border-[#4A2511]/10 hover:border-[#E8B520] hover:shadow-soft transition-all text-center space-y-2 group flex flex-col justify-between"
+              >
+                <div className="w-10 h-10 rounded-full mx-auto p-[2px] bg-gradient-to-tr from-[#f09433] via-[#dc2743] to-[#bc1888]">
+                  <div className="w-full h-full rounded-full bg-white flex items-center justify-center text-xs font-bold text-[#4A2511]">
+                    {alumni.founder.charAt(0)}
+                  </div>
+                </div>
+                <div>
+                  <h4 className="font-heading text-sm font-bold text-[#4A2511] group-hover:text-[#E8B520] transition-colors leading-tight">
+                    {alumni.name}
+                  </h4>
+                  <span className="text-[11px] text-[#7A6458] block mt-0.5">
+                    {alumni.founder}
+                  </span>
+                </div>
+                <span className="text-[10px] text-[#dc2743] font-semibold block truncate">
+                  {alumni.handle}
+                </span>
+              </a>
+            ))}
+          </div>
+        </div>
+
         {/* CTA */}
         <div className="bg-[#4A2511] text-white rounded-3xl p-10 sm:p-14 text-center space-y-6">
           <h2 className="font-heading text-3xl sm:text-4xl font-bold">

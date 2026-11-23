@@ -1,8 +1,18 @@
 export interface GallerySeedItem {
   id: string;
   imageUrl: string;
-  category: "Bridal Blouses" | "Couture Gowns" | "Aari Embroidery" | "Terracotta" | "Student Fests";
+  category:
+    | "Bridal Blouses"
+    | "Couture Gowns"
+    | "Aari Embroidery"
+    | "Terracotta"
+    | "Student Fests"
+    | "Student Ateliers";
   caption: string;
+  postUrl?: string;
+  instagramHandle?: string;
+  authorName?: string;
+  isInstagramPost?: boolean;
 }
 
 export interface AchievementSeedItem {
@@ -27,6 +37,57 @@ export interface TestimonialSeedItem {
 }
 
 export const SEED_GALLERY: GallerySeedItem[] = [
+  {
+    id: "g-piano-couture",
+    imageUrl: "/images/gallery/piano-couture-gown.webp",
+    category: "Couture Gowns",
+    caption:
+      "Architectural monochrome piano-keys couture gown with asymmetrical pleated neckline and dramatic floor drape.",
+  },
+  {
+    id: "g-post-renu",
+    imageUrl: "/images/gallery/piano-couture-gown.webp",
+    category: "Student Ateliers",
+    caption:
+      "Boutique showcase by student designer Renu — bespoke bridal wear drafted with Fashion Art Institute formulas.",
+    postUrl: "https://www.instagram.com/renu_fashion_magic/p/De_hMreyWzk/",
+    instagramHandle: "@renu_fashion_magic",
+    authorName: "Renu Fashion Magic",
+    isInstagramPost: true,
+  },
+  {
+    id: "g-post-aathi",
+    imageUrl: "/images/courses/advanced-aari.jpg",
+    category: "Student Ateliers",
+    caption:
+      "Handcrafted heritage ensembles and bridal blouse styling by certified alumni atelier.",
+    postUrl: "https://www.instagram.com/aathi_nathi_vibes/p/De_JAW9EYNp/",
+    instagramHandle: "@aathi_nathi_vibes",
+    authorName: "Aathi Nathi Vibes",
+    isInstagramPost: true,
+  },
+  {
+    id: "g-post-dhiyash",
+    imageUrl: "/images/courses/designer-patterns.jpg",
+    category: "Student Ateliers",
+    caption:
+      "Signature festive silhouettes and volume gown structures from Dhiyash Designs boutique studio.",
+    postUrl: "https://www.instagram.com/dhiyash_designs/p/De9v7DEGFen/",
+    instagramHandle: "@dhiyash_designs",
+    authorName: "Dhiyash Designs",
+    isInstagramPost: true,
+  },
+  {
+    id: "g-post-clar",
+    imageUrl: "/images/courses/diploma-fashion.jpg",
+    category: "Student Ateliers",
+    caption:
+      "Avant-garde runway aesthetics, conceptual drape geometry, and editorial fashion portfolio.",
+    postUrl: "https://www.instagram.com/_justclar_/p/De8xqU3k_E1/",
+    instagramHandle: "@_justclar_",
+    authorName: "Just Clar",
+    isInstagramPost: true,
+  },
   {
     id: "g1",
     imageUrl: "https://images.unsplash.com/photo-1617627143750-d86bc21e42bb?auto=format&fit=crop&w=1200&q=80",
