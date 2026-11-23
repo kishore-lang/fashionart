@@ -121,10 +121,11 @@ export default function AboutPage() {
             <div className="lg:col-span-5 relative">
               <div className="aspect-[4/5] rounded-2xl overflow-hidden shadow-xl border-4 border-white relative">
                 <Image
-                  src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=1000&q=80"
+                  src="/images/client_founder.png"
                   alt="Suguna Shanmugam"
                   fill
-                  className="object-cover"
+                  className="object-cover object-top"
+                  priority
                 />
               </div>
             </div>

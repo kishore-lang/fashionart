@@ -22,11 +22,12 @@ export function FounderSection() {
               className="relative w-full max-w-md aspect-[4/5] rounded-3xl overflow-hidden shadow-2xl border-4 border-white"
             >
               <Image
-                src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=1000&q=80"
+                src="/images/client_founder.png"
                 alt="Suguna Shanmugam - Founder & Chief Designer"
                 fill
                 sizes="(max-width: 768px) 100vw, 420px"
-                className="object-cover"
+                className="object-cover object-top"
+                priority
               />
               <div className="absolute inset-0 bg-gradient-to-t from-[#4A2511]/90 via-transparent to-transparent" />
 
