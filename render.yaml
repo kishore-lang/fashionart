@@ -1,0 +1,25 @@
+services:
+  - type: web
+    name: fashionart
+    env: node
+    plan: free # Can be upgraded to starter ($7/mo) with 1 click in Render Dashboard
+    region: singapore # Closest to India and lowest latency to Neon ap-southeast-1
+    buildCommand: node scripts/prebuild.js && npm run build
+    startCommand: npm run start
+    healthCheckPath: /
+    autoDeploy: true
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: DATABASE_URL
+        sync: false
+      - key: DATABASE_URL_UNPOOLED
+        sync: false
+      - key: NEXT_PUBLIC_WHATSAPP_NUMBER
+        value: "917397526669"
+      - key: NEXT_PUBLIC_INSTITUTE_PHONE
+        value: "+91 73975 26669"
+      - key: NEXT_PUBLIC_INSTITUTE_EMAIL
+        value: "fashionartonline@gmail.com"
+      - key: RESEND_ADMIN_EMAIL
+        value: "fashionartcbe@gmail.com"
