@@ -13,7 +13,7 @@ export function WhatsAppFloating() {
   return (
     <aside
       aria-label="Contact options"
-      className="fixed bottom-6 right-6 z-50 flex items-center group"
+      className="fixed bottom-20 right-4 lg:bottom-6 lg:right-6 z-40 flex items-center group"
     >
       <div className="mr-3 hidden sm:block opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-[#4A2511] text-[#FBF6EE] text-xs font-medium py-1.5 px-3 rounded-full shadow-lg border border-[#E8B520]/40 pointer-events-none">
         Chat with Admissions

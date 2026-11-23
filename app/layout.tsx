@@ -3,6 +3,7 @@ import "./globals.css";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { WhatsAppFloating } from "@/components/layout/WhatsAppFloating";
+import { MobileBottomNav } from "@/components/layout/MobileBottomNav";
 import { ClerkProvider } from "@clerk/nextjs";
 
 export const viewport: Viewport = {
@@ -119,9 +120,10 @@ export default function RootLayout({
         suppressHydrationWarning
       >
         <Navbar />
-        <main className="flex-1">{children}</main>
+        <main className="flex-1 pb-16 lg:pb-0">{children}</main>
         <Footer />
         <WhatsAppFloating />
+        <MobileBottomNav />
       </body>
     </html>
   );
