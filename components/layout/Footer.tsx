@@ -1,5 +1,6 @@
 import React from "react";
 import Link from "next/link";
+import Image from "next/image";
 import {
   MapPin,
   Phone,
@@ -21,13 +22,14 @@ export function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 pb-12 border-b border-white/10">
           {/* Col 1: Institute About */}
           <div className="space-y-4">
-            <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-xl bg-[#E8B520] flex items-center justify-center text-[#4A2511] font-heading font-bold text-lg shadow-md">
-                FA
-              </div>
-              <span className="font-heading text-xl font-bold tracking-tight text-[#E8B520]">
-                Fashion Art
-              </span>
+            <div className="bg-[#FBF6EE] px-3.5 py-2 rounded-2xl w-fit shadow-md border border-[#E8B520]/40">
+              <Image
+                src="/images/logo.png"
+                alt="Fashion Art Institute for Creative Skills"
+                width={180}
+                height={60}
+                className="h-10 w-auto object-contain"
+              />
             </div>
             <p className="text-sm text-[#F4DCD6]/80 leading-relaxed">
               Institute for Creative Skills. Empowering women, homemakers, and

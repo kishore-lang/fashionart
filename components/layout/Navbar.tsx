@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { Menu, X, Sparkles, PhoneCall, Shield } from "lucide-react";
 import { Button } from "@/components/ui/Button";
@@ -41,20 +42,15 @@ export function Navbar() {
       <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between w-full gap-2">
           {/* Logo & Institute Name */}
-          <Link href="/" className="flex items-center gap-2 sm:gap-3 group shrink-0">
-            <div className="w-9 h-9 sm:w-11 sm:h-11 rounded-xl bg-[#4A2511] flex items-center justify-center border border-[#E8B520]/50 shadow-md group-hover:scale-105 transition-transform duration-300 shrink-0">
-              <span className="font-heading text-sm sm:text-lg font-bold text-[#E8B520]">
-                FA
-              </span>
-            </div>
-            <div className="flex flex-col">
-              <span className="font-heading text-base sm:text-xl font-bold tracking-tight text-[#4A2511] leading-tight group-hover:text-[#E8B520] transition-colors">
-                Fashion Art
-              </span>
-              <span className="text-[9px] sm:text-xs font-medium tracking-wider text-[#7A6458] uppercase">
-                Institute for Creative Skills
-              </span>
-            </div>
+          <Link href="/" className="flex items-center gap-2 group shrink-0 py-1">
+            <Image
+              src="/images/logo.png"
+              alt="Fashion Art Institute for Creative Skills"
+              width={200}
+              height={70}
+              className="h-10 sm:h-12 w-auto object-contain group-hover:scale-105 transition-transform duration-300"
+              priority
+            />
           </Link>
 
           {/* Desktop Navigation Links */}

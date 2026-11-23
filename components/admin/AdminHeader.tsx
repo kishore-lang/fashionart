@@ -2,6 +2,7 @@
 
 import React, { useTransition } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 import {
   LayoutDashboard,
@@ -46,13 +47,19 @@ export function AdminHeader({ adminName, adminEmail }: AdminHeaderProps) {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3.5 flex flex-wrap items-center justify-between gap-4">
         {/* Brand */}
         <div className="flex items-center gap-3">
-          <div className="w-10 h-10 rounded-xl bg-[#E8B520] text-[#4A2511] font-heading font-bold text-lg flex items-center justify-center shadow-gold">
-            FA
-          </div>
+          <Link href="/admin" className="bg-[#FBF6EE] px-2.5 py-1.5 rounded-xl shadow-sm border border-[#E8B520]/40 flex items-center">
+            <Image
+              src="/images/logo.png"
+              alt="Fashion Art Institute"
+              width={140}
+              height={45}
+              className="h-8 w-auto object-contain"
+            />
+          </Link>
           <div>
             <div className="flex items-center gap-2">
               <span className="font-heading font-bold text-base tracking-wide text-[#FBF6EE]">
-                Fashion Art Institute
+                Director Control Center
               </span>
               <span className="text-[10px] uppercase font-bold tracking-wider px-2 py-0.5 rounded-full bg-[#E8B520]/20 text-[#E8B520] border border-[#E8B520]/40">
                 Admin Console
