@@ -23,6 +23,17 @@ export const db =
     ? drizzle(neon(connectionString), { schema })
     : null;
 
+export const COURSE_ORDER: Record<string, number> = {
+  "fashion-designing-diploma": 1,
+  "men-garments": 2,
+  "terracotta-jewellery-making": 3,
+  "advanced-aari-embroidery": 4,
+  "designer-patterns-advanced": 5,
+  "self-designing-course": 6,
+  "traditional-hand-embroidery": 7,
+  "master-tailoring-classes": 8,
+};
+
 /**
  * Fetch all published courses with optional filtering
  */
@@ -48,6 +59,10 @@ export async function getCourses(filters?: {
         if (filters?.category && filters.category !== "all") {
           list = list.filter((c) => c.category === filters.category);
         }
+        list.sort(
+          (a, b) =>
+            (COURSE_ORDER[a.slug] ?? 999) - (COURSE_ORDER[b.slug] ?? 999)
+        );
         return list;
       }
     } catch (err) {
@@ -63,6 +78,10 @@ export async function getCourses(filters?: {
   if (filters?.category && filters.category !== "all") {
     list = list.filter((c) => c.category === filters.category);
   }
+  list.sort(
+    (a, b) =>
+      (COURSE_ORDER[a.slug] ?? 999) - (COURSE_ORDER[b.slug] ?? 999)
+  );
   return list;
 }
 
