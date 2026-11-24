@@ -20,20 +20,25 @@ import {
   X,
   AlertCircle,
 } from "lucide-react";
-import { useUser, SignInButton, SignUpButton } from "@clerk/nextjs";
 import { INITIAL_DOLLS, DollItem } from "@/data/dollContest";
 import { submitDollVoteAction } from "@/lib/actions/contest";
 import { Button } from "@/components/ui/Button";
+import { ClerkAuthSection } from "@/components/contest/ClerkAuthSection";
 
 export function DollVotingForm({
   imageOverrides = {},
 }: {
   imageOverrides?: Record<number, string>;
 }) {
-  const { isSignedIn, user } = useUser();
+  const [authState, setAuthState] = useState<{
+    isSignedIn: boolean;
+    name?: string;
+    email?: string;
+  }>({ isSignedIn: true });
+
   const [selectedDollNum, setSelectedDollNum] = useState<number>(1);
   const [searchTerm, setSearchTerm] = useState("");
-  const [voterName, setVoterName] = useState(user?.fullName || "");
+  const [voterName, setVoterName] = useState("");
   const [voterPhone, setVoterPhone] = useState("");
   const [instagramId, setInstagramId] = useState("");
   const [comment, setComment] = useState("");
@@ -43,7 +48,16 @@ export function DollVotingForm({
   const [isPending, startTransition] = useTransition();
   const [submitSuccess, setSubmitSuccess] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
-  const [previewModalDoll, setPreviewModalDoll] = useState<DollItem | null>(null);
+
+  const handleAuthChange = React.useCallback(
+    (auth: { isSignedIn: boolean; name?: string; email?: string }) => {
+      setAuthState(auth);
+      if (auth.name && !voterName) {
+        setVoterName(auth.name);
+      }
+    },
+    [voterName]
+  );
 
   // Compute 100 dolls with any admin photo overrides
   const dolls = INITIAL_DOLLS.map((d) => ({
@@ -77,8 +91,8 @@ export function DollVotingForm({
     e.preventDefault();
     setErrorMessage("");
 
-    if (!isSignedIn) {
-      setErrorMessage("Please sign in with Clerk to submit your vote.");
+    if (!authState.isSignedIn) {
+      setErrorMessage("Please sign in or complete verification to submit your vote.");
       return;
     }
 
@@ -101,7 +115,7 @@ export function DollVotingForm({
       const res = await submitDollVoteAction({
         dollNumber: selectedDollNum,
         voterName: voterName.trim(),
-        voterEmail: user?.primaryEmailAddress?.emailAddress || "voter@example.com",
+        voterEmail: authState.email || "voter@fashionart.com",
         voterPhone: voterPhone.trim(),
         instagramId: instagramId.trim(),
         screenshotUrl: screenshotPreview || "/images/gallery/piano-couture-gown.webp",
@@ -157,65 +171,8 @@ export function DollVotingForm({
         <div className="h-4 bg-gradient-to-r from-[#4A2511] via-[#E8B520] to-[#4A2511]" />
 
         <div className="p-6 sm:p-10 space-y-10">
-          {/* Clerk Auth Gate Status Banner */}
-          <div
-            className={`p-5 rounded-2xl border transition-all ${
-              isSignedIn
-                ? "bg-emerald-50 border-emerald-300 text-emerald-900"
-                : "bg-amber-50 border-amber-300 text-amber-900"
-            }`}
-          >
-            {isSignedIn ? (
-              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-                <div className="flex items-center gap-3">
-                  <div className="w-9 h-9 rounded-full bg-emerald-500 text-white flex items-center justify-center font-bold text-sm">
-                    <UserCheck className="w-5 h-5" />
-                  </div>
-                  <div>
-                    <h3 className="font-heading text-sm font-bold text-emerald-900 leading-tight">
-                      Signed in as {user?.fullName || user?.firstName || "Voter"}
-                    </h3>
-                    <span className="text-xs text-emerald-700">
-                      {user?.primaryEmailAddress?.emailAddress} • Verified Voter
-                    </span>
-                  </div>
-                </div>
-                <span className="px-3 py-1 rounded-full bg-emerald-200 text-emerald-800 text-[11px] font-bold self-start sm:self-auto">
-                  Ready to Vote
-                </span>
-              </div>
-            ) : (
-              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-                <div className="flex items-start sm:items-center gap-3">
-                  <div className="w-9 h-9 rounded-full bg-amber-500 text-white flex items-center justify-center font-bold text-sm shrink-0">
-                    <Lock className="w-5 h-5" />
-                  </div>
-                  <div className="space-y-0.5">
-                    <h3 className="font-heading text-sm font-bold text-amber-900">
-                      Clerk Sign-in Required to Vote
-                    </h3>
-                    <p className="text-xs text-amber-800">
-                      To prevent duplicate votes, you must sign in with your account
-                      before submitting your vote.
-                    </p>
-                  </div>
-                </div>
-
-                <div className="flex items-center gap-2 shrink-0">
-                  <SignInButton mode="modal">
-                    <Button variant="gold" size="sm" className="shadow-sm">
-                      Sign In to Vote
-                    </Button>
-                  </SignInButton>
-                  <SignUpButton mode="modal">
-                    <Button variant="outline" size="sm">
-                      Register
-                    </Button>
-                  </SignUpButton>
-                </div>
-              </div>
-            )}
-          </div>
+          {/* Authentication & Verification Section */}
+          <ClerkAuthSection onAuthChange={handleAuthChange} />
 
           {/* =========================================================================
               STEP 1: CHOOSE 1 TO 100 FAVORITE DOLL
@@ -477,34 +434,20 @@ export function DollVotingForm({
                 </strong>
               </div>
 
-              {isSignedIn ? (
-                <Button
-                  type="submit"
-                  variant="gold"
-                  size="lg"
-                  disabled={isPending || submitSuccess}
-                  className="w-full sm:w-auto shadow-gold px-8 gap-2"
-                >
-                  <Send className="w-4 h-4" />
-                  <span>
-                    {isPending
-                      ? "Submitting Vote..."
-                      : `Cast Vote for Doll #${selectedDollNum}`}
-                  </span>
-                </Button>
-              ) : (
-                <SignInButton mode="modal">
-                  <Button
-                    type="button"
-                    variant="gold"
-                    size="lg"
-                    className="w-full sm:w-auto shadow-gold px-8 gap-2"
-                  >
-                    <Lock className="w-4 h-4" />
-                    <span>Sign In With Clerk to Vote</span>
-                  </Button>
-                </SignInButton>
-              )}
+              <Button
+                type="submit"
+                variant="gold"
+                size="lg"
+                disabled={isPending || submitSuccess || !authState.isSignedIn}
+                className="w-full sm:w-auto shadow-gold px-8 gap-2"
+              >
+                <Send className="w-4 h-4" />
+                <span>
+                  {isPending
+                    ? "Submitting Vote..."
+                    : `Cast Vote for Doll #${selectedDollNum}`}
+                </span>
+              </Button>
             </div>
           </form>
         </div>
