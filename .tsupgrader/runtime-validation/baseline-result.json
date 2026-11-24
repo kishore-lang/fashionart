@@ -1,0 +1,18 @@
+{
+  "planHash": "32a248781695080bd050f3d655e24f49dec476fb6325b7fab5030964213f918a",
+  "phase": "baseline",
+  "recordedAtUtc": "2026-11-24T03:10:48.1885776Z",
+  "retryCount": 0,
+  "resetBaseline": true,
+  "complete": false,
+  "runningStep": "home-page-serves",
+  "partialOutput": "invocation cancelled while waiting for http://localhost:3000/\n--- server output ---\n\r\n\u003E fashionart@0.1.0 dev\r\n\u003E next dev\r\n\r\n   \u25B2 Next.js 15.5.29\r\n   - Local:        http://localhost:3000\r\n   - Network:      http://172.20.10.13:3000\r\n   - Environments: .env.local\r\n\r\n \u2713 Starting...\r\n \u2713 Ready in 8.7s\r\n \u25CB Compiling /middleware ...\r\n \u2713 Compiled /middleware in 4.9s (222 modules)\r\n\u003Cw\u003E [webpack.cache.PackFileCacheStrategy] Serializing big strings (194kiB) impacts deserialization performance (consider using Buffer instead and decode when needed)\r\n \u25CB Compiling / ...\r\n \u2713 Compiled / in 34.6s (2167 modules)\r\n GET / 200 in 17203ms\r\n \u2713 Compiled in 19s (834 modules)\r\n GET / 200 in 3752ms\r\n",
+  "cleanupCompleted": true,
+  "result": {
+    "setupSucceeded": false,
+    "setupDurationMs": 0,
+    "setupFailureOutput": null,
+    "assertions": [],
+    "executions": []
+  }
+}

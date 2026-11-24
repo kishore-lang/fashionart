@@ -74,3 +74,27 @@ html {
     scroll-behavior: auto !important;
   }
 }
+/* Newspaper "hanging" animation */
+@keyframes swing {
+  0%   { transform: rotate(4deg); }
+  50%  { transform: rotate(-4deg); }
+  100% { transform: rotate(4deg); }
+}
+
+.achievement-card {
+  @apply relative overflow-hidden rounded-xl border border-[#E8B520]/30 bg-[#FBF6EE] shadow-lg;
+  opacity: 0;
+  animation: fadeIn 0.8s forwards ease-out;
+  animation-delay: var(--delay, 0s);
+}
+
+.achievement-card::before {
+  content: "";
+  @apply absolute inset-0 border-t-8 border-l-8 border-r-8 border-[#4A2511] bg-[#FFF9E5];
+  transform-origin: top center;
+  animation: swing 3s ease-in-out infinite;
+}
+
+@keyframes fadeIn {
+  to { opacity: 1; }
+}
