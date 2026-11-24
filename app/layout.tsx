@@ -97,40 +97,36 @@ export default function RootLayout({
     },
   };
 
-  const hasClerkKey =
-    process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY &&
-    !process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY.includes("placeholder");
+  const publishableKey =
+    process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY ||
+    "pk_test_cHJlcGFyZWQtd2FscnVzLTUzMC5jbGVyay5hY2NvdW50cy5kZXYk";
 
-  const content = (
-    <html lang="en" className="scroll-smooth" suppressHydrationWarning>
-      <head>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link
-          href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,900;1,400;1,700&family=Poppins:wght@300;400;500;600;700&display=swap"
-          rel="stylesheet"
-        />
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-        />
-      </head>
-      <body
-        className="min-h-screen flex flex-col bg-[#FBF6EE] text-[#4A2511] antialiased overflow-x-hidden"
-        suppressHydrationWarning
-      >
-        <Navbar />
-        <main className="flex-1 pb-16 lg:pb-0">{children}</main>
-        <Footer />
-        <WhatsAppFloating />
-        <MobileBottomNav />
-      </body>
-    </html>
+  return (
+    <ClerkProvider publishableKey={publishableKey}>
+      <html lang="en" className="scroll-smooth" suppressHydrationWarning>
+        <head>
+          <link rel="preconnect" href="https://fonts.googleapis.com" />
+          <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+          <link
+            href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,900;1,400;1,700&family=Poppins:wght@300;400;500;600;700&display=swap"
+            rel="stylesheet"
+          />
+          <script
+            type="application/ld+json"
+            dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+          />
+        </head>
+        <body
+          className="min-h-screen flex flex-col bg-[#FBF6EE] text-[#4A2511] antialiased overflow-x-hidden"
+          suppressHydrationWarning
+        >
+          <Navbar />
+          <main className="flex-1 pb-16 lg:pb-0">{children}</main>
+          <Footer />
+          <WhatsAppFloating />
+          <MobileBottomNav />
+        </body>
+      </html>
+    </ClerkProvider>
   );
-
-  if (hasClerkKey) {
-    return <ClerkProvider>{content}</ClerkProvider>;
-  }
-
-  return content;
 }
