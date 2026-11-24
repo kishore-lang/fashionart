@@ -167,6 +167,48 @@ export async function createCourseAdmin(input: CourseInput): Promise<CourseData>
   return newCourse;
 }
 
+export async function updateCourseAdmin(
+  idOrSlug: string,
+  input: Partial<CourseInput>
+): Promise<CourseData | null> {
+  const targetIndex = memoryCourses.findIndex(
+    (c) => c.id === idOrSlug || c.slug === idOrSlug
+  );
+  if (targetIndex === -1) return null;
+
+  const updated: CourseData = {
+    ...memoryCourses[targetIndex],
+    ...input,
+  };
+
+  if (db) {
+    try {
+      await db
+        .update(schema.courses)
+        .set({
+          title: updated.title,
+          description: updated.description,
+          category: updated.category,
+          mode: updated.mode,
+          price: updated.price,
+          durationDays: updated.durationDays,
+          stepsCount: updated.stepsCount,
+          thumbnailUrl: updated.thumbnailUrl,
+          syllabus: updated.syllabus,
+          nuances: updated.nuances,
+          isFeatured: updated.isFeatured,
+          isPublished: updated.isPublished,
+        })
+        .where(eq(schema.courses.slug, updated.slug));
+    } catch (err) {
+      console.warn("Neon DB update course failed, updating memory:", err);
+    }
+  }
+
+  memoryCourses[targetIndex] = updated;
+  return updated;
+}
+
 export async function deleteCourseAdmin(id: string): Promise<boolean> {
   if (db) {
     try {

@@ -1,9 +1,10 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useTransition } from "react";
 import Image from "next/image";
-import { Lock, KeyRound, ArrowRight, ShieldCheck, LogOut, Eye, EyeOff } from "lucide-react";
+import { Lock, KeyRound, ArrowRight, ShieldCheck, LogOut, Eye, EyeOff, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/Button";
+import { loginWithAdminPasswordAction, logoutAdminAction } from "@/lib/actions/auth";
 
 export function AdminPasswordAuth({
   children,
@@ -16,29 +17,30 @@ export function AdminPasswordAuth({
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState("");
-  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isPending, startTransition] = useTransition();
 
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();
     setError("");
-    setIsSubmitting(true);
 
-    // Predefined password check (fashionart2026 or admin2026)
-    const validPasswords = ["fashionart2026", "admin2026", "suguna2026"];
-    if (validPasswords.includes(password.trim())) {
-      // Set cookie for 30 days
-      document.cookie = `fashionart_admin_session=authenticated; path=/; max-age=${30 * 24 * 60 * 60}; SameSite=Lax`;
-      setIsAuthenticated(true);
-    } else {
-      setError("Incorrect admin password. Please try again.");
-    }
-    setIsSubmitting(false);
+    startTransition(async () => {
+      const res = await loginWithAdminPasswordAction(password.trim());
+      if (res.success) {
+        document.cookie = `fashionart_admin_session=authenticated; path=/; max-age=${30 * 24 * 60 * 60}; SameSite=Lax`;
+        setIsAuthenticated(true);
+      } else {
+        setError(res.error || "Incorrect admin password. Please try again.");
+      }
+    });
   };
 
   const handleLogout = () => {
-    document.cookie = `fashionart_admin_session=; path=/; max-age=0; SameSite=Lax`;
-    setIsAuthenticated(false);
-    setPassword("");
+    startTransition(async () => {
+      await logoutAdminAction();
+      document.cookie = `fashionart_admin_session=; path=/; max-age=0; SameSite=Lax`;
+      setIsAuthenticated(false);
+      setPassword("");
+    });
   };
 
   if (isAuthenticated) {
@@ -120,11 +122,15 @@ export function AdminPasswordAuth({
             type="submit"
             variant="gold"
             size="lg"
-            disabled={isSubmitting}
+            disabled={isPending}
             className="w-full justify-center gap-2 text-sm shadow-md"
           >
-            <KeyRound className="w-4 h-4" />
-            <span>Unlock Admin Panel</span>
+            {isPending ? (
+              <Loader2 className="w-4 h-4 animate-spin" />
+            ) : (
+              <KeyRound className="w-4 h-4" />
+            )}
+            <span>{isPending ? "Verifying..." : "Unlock Admin Panel"}</span>
             <ArrowRight className="w-4 h-4" />
           </Button>
         </form>

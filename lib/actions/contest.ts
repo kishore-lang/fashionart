@@ -2,6 +2,8 @@
 
 import { revalidatePath } from "next/cache";
 import { DollVoteSubmission } from "@/data/dollContest";
+import { db } from "@/db";
+import * as schema from "@/db/schema";
 
 // In-memory persistent array for demo / server lifecycle
 let STORED_VOTES: DollVoteSubmission[] = [
@@ -55,6 +57,16 @@ export async function submitDollVoteAction(data: {
     };
 
     STORED_VOTES.unshift(newVote);
+
+    if (db) {
+      try {
+        await db.insert(schema.contestVotes).values({
+          voterIdentifier: `${newVote.instagramId} (${newVote.voterName}, ${newVote.voterPhone}) - Doll #${newVote.dollNumber}`,
+        });
+      } catch (dbErr) {
+        console.warn("Neon DB vote insert failed, using memory:", dbErr);
+      }
+    }
 
     revalidatePath("/contest");
     revalidatePath("/admin/contest");

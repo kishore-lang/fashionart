@@ -13,6 +13,7 @@ import {
   updateAdminEnquiryStatus,
   deleteAdminEnquiry,
   createCourseAdmin,
+  updateCourseAdmin,
   deleteCourseAdmin,
   createGalleryAdmin,
   deleteGalleryAdmin,
@@ -70,6 +71,21 @@ export async function createCourseAction(rawInput: CourseInput) {
   revalidatePath("/");
 
   return { success: true, course: created };
+}
+
+export async function updateCourseAction(idOrSlug: string, updates: Partial<CourseInput>) {
+  // Strict server-side verification
+  await verifyAdmin();
+
+  const updated = await updateCourseAdmin(idOrSlug, updates);
+
+  revalidatePath("/admin");
+  revalidatePath("/admin/courses");
+  revalidatePath("/courses");
+  revalidatePath(`/courses/${idOrSlug}`);
+  revalidatePath("/");
+
+  return { success: true, course: updated };
 }
 
 export async function deleteCourseAction(id: string) {

@@ -1,5 +1,8 @@
 import { auth, currentUser } from "@clerk/nextjs/server";
 import { cookies } from "next/headers";
+import { db } from "@/db";
+import * as schema from "@/db/schema";
+import { eq } from "drizzle-orm";
 
 export interface SessionUser {
   userId: string | null;
@@ -11,8 +14,8 @@ export interface SessionUser {
 
 /**
  * Server-side verification for admin privileges.
- * Strictly verifies Clerk auth session & publicMetadata.role === "admin".
- * Fallback to development role cookie when Clerk credentials are not provisioned.
+ * Strictly verifies Clerk auth session & publicMetadata.role === "admin" or database profile.
+ * Fallback to admin session / role cookie when predefined password is used.
  */
 export async function verifyAdmin(): Promise<{ userId: string; role: "admin"; isDemo?: boolean }> {
   try {
@@ -27,20 +30,36 @@ export async function verifyAdmin(): Promise<{ userId: string; role: "admin"; is
       if (role === "admin") {
         return { userId, role: "admin" };
       }
-      throw new Error("Forbidden: Admin privileges required.");
+
+      // Check Neon PostgreSQL profiles table
+      if (db) {
+        try {
+          const profileRows = await db
+            .select()
+            .from(schema.profiles)
+            .where(eq(schema.profiles.clerkUserId, userId))
+            .limit(1);
+
+          if (profileRows && profileRows[0]?.role === "admin") {
+            return { userId, role: "admin" };
+          }
+        } catch {
+          // neon query error fallback
+        }
+      }
     }
   } catch (err: unknown) {
     if (err instanceof Error && err.message.includes("Forbidden")) {
       throw err;
     }
-    // Continue to check local demo session cookie if Clerk session is absent or not configured
   }
 
-  // Check demo cookie (for local evaluation & development testing)
+  // Check demo cookie and admin password session cookie
   const cookieStore = await cookies();
   const demoRole = cookieStore.get("fashionart_role")?.value;
-  if (demoRole === "admin") {
-    return { userId: "admin_demo_account", role: "admin", isDemo: true };
+  const adminSession = cookieStore.get("fashionart_admin_session")?.value;
+  if (demoRole === "admin" || adminSession === "authenticated") {
+    return { userId: "admin_director_account", role: "admin", isDemo: true };
   }
 
   throw new Error("Unauthorized: You must be logged in as an administrator.");
@@ -79,10 +98,41 @@ export async function getCurrentSessionUser(): Promise<SessionUser> {
   try {
     const user = await currentUser();
     if (user) {
-      const role =
+      let role: "admin" | "student" =
         (user.publicMetadata as { role?: string })?.role === "admin"
           ? "admin"
           : "student";
+
+      // Sync or retrieve role from Neon PostgreSQL profiles table
+      if (db) {
+        try {
+          const profileRows = await db
+            .select()
+            .from(schema.profiles)
+            .where(eq(schema.profiles.clerkUserId, user.id))
+            .limit(1);
+
+          if (profileRows && profileRows.length > 0) {
+            if (profileRows[0].role === "admin") role = "admin";
+          } else {
+            // First time login - auto provision profile in Neon DB
+            await db
+              .insert(schema.profiles)
+              .values({
+                clerkUserId: user.id,
+                name:
+                  user.fullName ||
+                  `${user.firstName || ""} ${user.lastName || ""}`.trim() ||
+                  "Student",
+                phone: user.phoneNumbers[0]?.phoneNumber || "",
+                role,
+              })
+              .onConflictDoNothing();
+          }
+        } catch (dbErr) {
+          console.warn("Neon DB profile sync failed:", dbErr);
+        }
+      }
 
       return {
         userId: user.id,
@@ -103,10 +153,11 @@ export async function getCurrentSessionUser(): Promise<SessionUser> {
 
   const cookieStore = await cookies();
   const demoRole = cookieStore.get("fashionart_role")?.value as "admin" | "student" | undefined;
+  const adminSession = cookieStore.get("fashionart_admin_session")?.value;
 
-  if (demoRole === "admin") {
+  if (demoRole === "admin" || adminSession === "authenticated") {
     return {
-      userId: "demo_admin_user",
+      userId: "admin_director_account",
       role: "admin",
       name: "Suguna Shanmugam (Director)",
       email: "director@fashionartonline.com",
