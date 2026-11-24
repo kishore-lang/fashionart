@@ -100,13 +100,19 @@ export async function submitEnquiry(
   }
 
   // 4. Append to Google Sheet (if webhook configured)
-  const sheetWebhook = process.env.GOOGLE_SHEET_WEBHOOK_URL;
-  if (sheetWebhook && !sheetWebhook.includes("AKfycb...")) {
+  const sheetWebhook =
+    process.env.GOOGLE_SHEET_CONTACT_WEBHOOK_URL ||
+    process.env.GOOGLE_SHEET_WEBHOOK_URL ||
+    "https://script.google.com/macros/s/AKfycbzewneTiPuUloKnq2UJpqPizIqO9umSt5ZFiMfjOGGArMNo-t9ypvXpwtfohwiIyM9k/exec";
+
+  if (sheetWebhook && sheetWebhook.startsWith("http")) {
     try {
-      await fetch(sheetWebhook, {
+      const sheetRes = await fetch(sheetWebhook, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: { "Content-Type": "text/plain;charset=utf-8" },
         body: JSON.stringify({
+          sheet: "Contact",
+          type: "contact",
           timestamp: new Date().toISOString(),
           name,
           email,
@@ -114,7 +120,10 @@ export async function submitEnquiry(
           course: courseName || "General Enquiry",
           message,
         }),
+        redirect: "follow",
       });
+      const sheetText = await sheetRes.text();
+      console.log("Google Sheets Contact Sync Response:", sheetText);
     } catch (sheetErr) {
       console.warn("Google Sheet sync failed:", sheetErr);
     }

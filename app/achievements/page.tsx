@@ -1,58 +1,28 @@
-import Image from "next/image";
+import React from "react";
+import { Metadata } from "next";
+import { EditorialAchievements } from "@/components/achievements/EditorialAchievements";
 
-const achievementData = [
-  {
-    title: "Student Showcase",
-    img: "/images/achievements/achievement-1.avif",
-    delay: "0s",
+export const metadata: Metadata = {
+  title:
+    "Achievements & Media Recognition | Fashion Art Institute Coimbatore",
+  description:
+    "Featured in Kumudam Snegithi & Dinamalar Penmalar. Universal Record Forum (URF) World Record holder, Best Creative Designer of Tamil Nadu, and Radio City Kovai Icon.",
+  openGraph: {
+    title:
+      "A Journey of Passion, Purpose & Recognition | Fashion Art Institute",
+    description:
+      "Explore real press features in Kumudam Snegithi and Dinamalar, URF World Record, Radio City Kovai Icon honours, and milestones empowering women through fashion.",
+    images: [
+      {
+        url: "/images/achievements/kumudam-snegithi-feature.webp",
+        width: 1200,
+        height: 630,
+        alt: "Kumudam Snegithi Media Feature - Fashion Art Institute",
+      },
+    ],
   },
-  {
-    title: "Design Awards",
-    img: "/images/achievements/achievement-2.avif",
-    delay: "0.2s",
-  },
-  {
-    title: "Creative Expo",
-    img: "/images/achievements/achievement-3.avif",
-    delay: "0.4s",
-  },
-  {
-    title: "Fashion Fest",
-    img: "/images/achievements/achievement-4.avif",
-    delay: "0.6s",
-  },
-];
+};
 
 export default function AchievementsPage() {
-  return (
-    <section className="py-12 bg-[#FBF6EE]">
-      <div className="max-w-6xl mx-auto px-4">
-        <h2 className="text-3xl font-heading text-center text-[#4A2511] mb-8">
-          Our Achievements
-        </h2>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-8">
-          {achievementData.map((item, i) => (
-            <div
-              key={i}
-              className="achievement-card"
-              style={{ "--delay": item.delay } as React.CSSProperties}
-            >
-              <div className="relative p-6">
-                <h3 className="font-heading text-xl text-[#4A2511] mb-4">
-                  {item.title}
-                </h3>
-                <Image
-                  src={item.img}
-                  alt={item.title}
-                  width={640}
-                  height={480}
-                  className="rounded-lg object-cover w-full h-auto"
-                />
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
+  return <EditorialAchievements />;
 }

@@ -12,7 +12,12 @@ export const metadata: Metadata = {
 export const dynamic = "force-dynamic";
 
 export default async function ContestPage() {
-  const overrides = await getDollImageOverridesAction();
+  let overrides: Record<number, string> = {};
+  try {
+    overrides = await getDollImageOverridesAction();
+  } catch (err) {
+    console.warn("Could not fetch doll image overrides, using defaults:", err);
+  }
 
   return (
     <div className="py-8 sm:py-14">

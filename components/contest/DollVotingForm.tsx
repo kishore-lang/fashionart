@@ -23,7 +23,26 @@ import {
 import { INITIAL_DOLLS, DollItem } from "@/data/dollContest";
 import { submitDollVoteAction } from "@/lib/actions/contest";
 import { Button } from "@/components/ui/Button";
-import { ClerkAuthSection } from "@/components/contest/ClerkAuthSection";
+import dynamic from "next/dynamic";
+
+const ClerkAuthSection = dynamic(
+  () =>
+    import("@/components/contest/ClerkAuthSection").then(
+      (mod) => mod.ClerkAuthSection
+    ),
+  {
+    ssr: false,
+    loading: () => (
+      <div className="p-5 rounded-2xl bg-amber-50/50 border border-amber-200/50 flex items-center gap-3 animate-pulse">
+        <div className="w-9 h-9 rounded-full bg-amber-200" />
+        <div className="space-y-1">
+          <div className="h-4 w-36 bg-amber-200 rounded" />
+          <div className="h-3 w-56 bg-amber-100 rounded" />
+        </div>
+      </div>
+    ),
+  }
+);
 
 export function DollVotingForm({
   imageOverrides = {},

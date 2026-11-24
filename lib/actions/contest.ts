@@ -68,6 +68,38 @@ export async function submitDollVoteAction(data: {
       }
     }
 
+    // Sync to Google Sheet if Webhook is configured
+    const gSheetUrl =
+      process.env.GOOGLE_SHEET_VOTING_WEBHOOK_URL ||
+      process.env.GOOGLE_SHEET_WEBHOOK_URL ||
+      "https://script.google.com/macros/s/AKfycbzewneTiPuUloKnq2UJpqPizIqO9umSt5ZFiMfjOGGArMNo-t9ypvXpwtfohwiIyM9k/exec";
+
+    if (gSheetUrl && gSheetUrl.startsWith("http")) {
+      try {
+        const sheetRes = await fetch(gSheetUrl, {
+          method: "POST",
+          headers: { "Content-Type": "text/plain;charset=utf-8" },
+          body: JSON.stringify({
+            sheet: "Votes",
+            type: "vote",
+            timestamp: newVote.submittedAt,
+            dollNumber: newVote.dollNumber,
+            voterName: newVote.voterName,
+            voterEmail: newVote.voterEmail,
+            voterPhone: newVote.voterPhone,
+            instagramId: newVote.instagramId,
+            comment: newVote.comment,
+            screenshotUrl: newVote.screenshotUrl,
+          }),
+          redirect: "follow",
+        });
+        const sheetText = await sheetRes.text();
+        console.log("Google Sheets Voting Sync Response:", sheetText);
+      } catch (sheetErr) {
+        console.warn("Google Sheet voting sync failed gracefully:", sheetErr);
+      }
+    }
+
     revalidatePath("/contest");
     revalidatePath("/admin/contest");
 
