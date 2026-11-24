@@ -35,6 +35,10 @@ export const GalleryItemSchema = z.object({
   id: z.string().uuid().optional(),
   imageUrl: z.string().url("Must be a valid image URL").or(z.string().min(1)),
   category: z.enum([
+    "Fashion Show",
+    "Students Works",
+    "Photo Shoot",
+    "Convocation",
     "Bridal Blouses",
     "Couture Gowns",
     "Aari Embroidery",

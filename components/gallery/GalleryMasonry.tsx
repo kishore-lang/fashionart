@@ -20,13 +20,12 @@ import { INSTAGRAM_REELS, InstagramReelItem } from "@/data/instagramContent";
 
 const CATEGORIES = [
   "All",
-  "Convocation",
   "Fashion Show",
-  "Student Ateliers",
+  "Students Works",
+  "Photo Shoot",
+  "Convocation",
   "Couture Gowns",
-  "Bridal Blouses",
-  "Aari Embroidery",
-  "Terracotta",
+  "Student Ateliers",
 ];
 
 export function GalleryMasonry({
@@ -215,16 +214,16 @@ export function GalleryMasonry({
                 <div className="relative aspect-[4/5] overflow-hidden bg-[#F4DCD6]/30">
                   <Image
                     src={item.imageUrl}
-                    alt={item.caption}
+                    alt={item.caption || item.category || "Fashion Art Gallery Image"}
                     fill
                     sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                     className="object-cover group-hover:scale-105 transition-transform duration-500"
                   />
 
                   {/* Hover Overlay */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#4A2511]/95 via-[#4A2511]/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-between p-6">
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#4A2511]/90 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-between p-5">
                     <div className="flex justify-between items-start">
-                      <Badge variant="gold" className="text-[10px]">
+                      <Badge variant="gold" className="text-[10px] shadow-sm">
                         {item.category}
                       </Badge>
                       <div className="w-8 h-8 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center text-white">
@@ -232,44 +231,35 @@ export function GalleryMasonry({
                       </div>
                     </div>
 
-                    <div className="space-y-2">
-                      <p className="text-white text-xs sm:text-sm font-medium line-clamp-3 leading-relaxed">
-                        {item.caption}
-                      </p>
-                      <span className="text-[11px] text-[#E8B520] font-semibold inline-block">
+                    <div className="flex justify-end">
+                      <span className="text-[11px] text-[#E8B520] font-semibold bg-black/50 px-2.5 py-1 rounded-full backdrop-blur-sm">
                         {isInsta
-                          ? "View Post & Details →"
-                          : "Click to expand photo →"}
+                          ? "View Post →"
+                          : "View Photo →"}
                       </span>
                     </div>
                   </div>
                 </div>
 
-                {/* Bottom Caption Pill */}
-                <div className="p-4 sm:p-5 bg-white space-y-2">
-                  <p className="text-xs sm:text-sm text-[#4A2511] font-medium line-clamp-2 leading-relaxed">
-                    {item.caption}
-                  </p>
-
-                  {isInsta && item.postUrl && (
-                    <div className="pt-2 border-t border-[#4A2511]/5 flex items-center justify-between text-xs">
-                      <span className="text-[11px] font-semibold text-[#dc2743] flex items-center gap-1">
-                        <Instagram className="w-3 h-3" />
-                        <span>{item.instagramHandle}</span>
-                      </span>
-                      <a
-                        href={item.postUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        onClick={(e) => e.stopPropagation()}
-                        className="text-[11px] font-bold text-[#4A2511] hover:text-[#E8B520] flex items-center gap-1"
-                      >
-                        <span>Open Post</span>
-                        <ExternalLink className="w-3 h-3" />
-                      </a>
-                    </div>
-                  )}
-                </div>
+                {/* Optional Instagram Link Strip (no image descriptions) */}
+                {isInsta && item.postUrl && (
+                  <div className="p-3 bg-white border-t border-[#4A2511]/5 flex items-center justify-between text-xs">
+                    <span className="text-[11px] font-semibold text-[#dc2743] flex items-center gap-1">
+                      <Instagram className="w-3 h-3" />
+                      <span>{item.instagramHandle}</span>
+                    </span>
+                    <a
+                      href={item.postUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      onClick={(e) => e.stopPropagation()}
+                      className="text-[11px] font-bold text-[#4A2511] hover:text-[#E8B520] flex items-center gap-1"
+                    >
+                      <span>Open</span>
+                      <ExternalLink className="w-3 h-3" />
+                    </a>
+                  </div>
+                )}
               </motion.div>
             );
           })}
@@ -337,16 +327,16 @@ export function GalleryMasonry({
               <div className="relative w-full h-[60vh] sm:h-[70vh] rounded-2xl overflow-hidden shadow-2xl bg-black/50">
                 <Image
                   src={currentItem.imageUrl}
-                  alt={currentItem.caption}
+                  alt={currentItem.caption || currentItem.category || "Fashion Art Gallery Image"}
                   fill
                   className="object-contain"
                   priority
                 />
               </div>
 
-              {/* Lightbox Caption Card */}
-              <div className="mt-4 bg-[#4A2511]/90 backdrop-blur-md text-white p-4 sm:p-5 rounded-2xl max-w-2xl w-full text-center space-y-2 border border-white/10">
-                <div className="flex items-center justify-center gap-2">
+              {/* Lightbox Minimal Bar (No descriptions) */}
+              <div className="mt-4 bg-[#4A2511]/90 backdrop-blur-md text-white px-5 py-3 rounded-2xl max-w-xl w-full flex items-center justify-between border border-white/10">
+                <div className="flex items-center gap-2">
                   <Badge variant="gold" className="text-[10px]">
                     {currentItem.category}
                   </Badge>
@@ -357,23 +347,17 @@ export function GalleryMasonry({
                   )}
                 </div>
 
-                <p className="text-xs sm:text-sm text-[#F4DCD6] leading-relaxed">
-                  {currentItem.caption}
-                </p>
-
                 {currentItem.postUrl && (
-                  <div className="pt-2">
-                    <a
-                      href={currentItem.postUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-gradient-to-r from-[#f09433] via-[#dc2743] to-[#bc1888] text-white text-xs font-bold hover:scale-105 transition-transform shadow-md"
-                    >
-                      <Instagram className="w-3.5 h-3.5" />
-                      <span>View Live Post on Instagram</span>
-                      <ExternalLink className="w-3 h-3" />
-                    </a>
-                  </div>
+                  <a
+                    href={currentItem.postUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-gradient-to-r from-[#f09433] via-[#dc2743] to-[#bc1888] text-white text-[11px] font-bold hover:scale-105 transition-transform shadow-md"
+                  >
+                    <Instagram className="w-3 h-3" />
+                    <span>Open Instagram</span>
+                    <ExternalLink className="w-2.5 h-2.5" />
+                  </a>
                 )}
               </div>
             </div>

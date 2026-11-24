@@ -2,15 +2,17 @@ export interface GallerySeedItem {
   id: string;
   imageUrl: string;
   category:
-    | "Bridal Blouses"
+    | "Fashion Show"
+    | "Students Works"
+    | "Photo Shoot"
+    | "Convocation"
     | "Couture Gowns"
+    | "Student Ateliers"
+    | "Bridal Blouses"
     | "Aari Embroidery"
     | "Terracotta"
-    | "Student Fests"
-    | "Student Ateliers"
-    | "Convocation"
-    | "Fashion Show";
-  caption: string;
+    | "Student Fests";
+  caption?: string;
   postUrl?: string;
   instagramHandle?: string;
   authorName?: string;
@@ -39,66 +41,116 @@ export interface TestimonialSeedItem {
 }
 
 export const SEED_GALLERY: GallerySeedItem[] = [
-  // 1. Convocation Photos (Real Institute Graduation Events)
+  // 1. Fashion Show (Live Runway from fashionartonline.com/fashionshow)
   {
-    id: "g-convocation-1",
-    imageUrl: "/images/gallery/convocation-1.webp",
-    category: "Convocation",
-    caption:
-      "Annual Convocation Ceremony — Central Government Certified fashion couturiers receiving formal diplomas on stage.",
+    id: "g-fashionshow-live-1",
+    imageUrl: "/images/gallery/fashionshow-1.webp",
+    category: "Fashion Show",
+    caption: "Fashion Show Runway Collection",
   },
   {
-    id: "g-convocation-2",
-    imageUrl: "/images/gallery/convocation-2.webp",
-    category: "Convocation",
-    caption:
-      "Graduation honours and student felicitations alongside founder Suguna Shanmugam in Coimbatore.",
+    id: "g-fashionshow-live-2",
+    imageUrl: "/images/gallery/fashionshow-2.webp",
+    category: "Fashion Show",
+    caption: "Fashion Show Runway Collection",
   },
   {
-    id: "g-convocation-3",
-    imageUrl: "/images/gallery/convocation-3.webp",
-    category: "Convocation",
-    caption:
-      "Proud student designers celebrating certification milestones and graduation moments with faculty.",
+    id: "g-fashionshow-live-3",
+    imageUrl: "/images/gallery/fashionshow-3.webp",
+    category: "Fashion Show",
+    caption: "Fashion Show Runway Collection",
   },
-
-  // 2. Fashion Show Runway Photos (Real Grand Runway Events)
   {
     id: "g-fashion-show-1",
     imageUrl: "/images/gallery/fashion-show-1.webp",
     category: "Fashion Show",
-    caption:
-      "Grand Runway Fashion Show — student-designed haute couture gowns presented by professional runway models.",
+    caption: "Fashion Show Event",
   },
   {
     id: "g-fashion-show-2",
     imageUrl: "/images/gallery/fashion-show-2.webp",
     category: "Fashion Show",
-    caption:
-      "Runway spotlight: intricate bridal silk drapes and bespoke festive garments crafted in our Coimbatore ateliers.",
+    caption: "Fashion Show Event",
   },
   {
     id: "g-fashion-show-3",
     imageUrl: "/images/gallery/fashion-show-3.webp",
     category: "Fashion Show",
-    caption:
-      "Couture exhibition and designer ramp walk celebrating creativity, fit perfection, and women designers.",
+    caption: "Fashion Show Event",
   },
 
-  // 3. Haute Couture Masterpieces & Student Ateliers
+  // 2. Students Works (from fashionartonline.com/studentsworks)
+  {
+    id: "g-student-work-1",
+    imageUrl: "/images/gallery/studentwork-1.webp",
+    category: "Students Works",
+    caption: "Students Work Collection",
+  },
+  {
+    id: "g-student-work-2",
+    imageUrl: "/images/gallery/studentwork-2.webp",
+    category: "Students Works",
+    caption: "Students Work Collection",
+  },
+  {
+    id: "g-student-work-3",
+    imageUrl: "/images/gallery/studentwork-3.webp",
+    category: "Students Works",
+    caption: "Students Work Collection",
+  },
+
+  // 3. Photo Shoot (from fashionartonline.com/photoshoot)
+  {
+    id: "g-photoshoot-1",
+    imageUrl: "/images/gallery/photoshoot-1.webp",
+    category: "Photo Shoot",
+    caption: "Editorial Photo Shoot",
+  },
+  {
+    id: "g-photoshoot-2",
+    imageUrl: "/images/gallery/photoshoot-2.webp",
+    category: "Photo Shoot",
+    caption: "Editorial Photo Shoot",
+  },
+  {
+    id: "g-photoshoot-3",
+    imageUrl: "/images/gallery/photoshoot-3.webp",
+    category: "Photo Shoot",
+    caption: "Editorial Photo Shoot",
+  },
+
+  // 4. Convocation Photos (Annual Graduation Ceremony)
+  {
+    id: "g-convocation-1",
+    imageUrl: "/images/gallery/convocation-1.webp",
+    category: "Convocation",
+    caption: "Annual Convocation Ceremony",
+  },
+  {
+    id: "g-convocation-2",
+    imageUrl: "/images/gallery/convocation-2.webp",
+    category: "Convocation",
+    caption: "Annual Convocation Ceremony",
+  },
+  {
+    id: "g-convocation-3",
+    imageUrl: "/images/gallery/convocation-3.webp",
+    category: "Convocation",
+    caption: "Annual Convocation Ceremony",
+  },
+
+  // 5. Haute Couture & Atelier Highlights
   {
     id: "g-piano-couture",
     imageUrl: "/images/gallery/piano-couture-gown.webp",
     category: "Couture Gowns",
-    caption:
-      "Architectural monochrome piano-keys couture gown with asymmetrical pleated neckline and dramatic floor drape.",
+    caption: "Couture Design",
   },
   {
     id: "g-post-renu",
     imageUrl: "/images/gallery/piano-couture-gown.webp",
     category: "Student Ateliers",
-    caption:
-      "Boutique showcase by student designer Renu — bespoke bridal wear drafted with Fashion Art Institute formulas.",
+    caption: "Student Atelier Showcase",
     postUrl: "https://www.instagram.com/renu_fashion_magic/p/De_hMreyWzk/",
     instagramHandle: "@renu_fashion_magic",
     authorName: "Renu Fashion Magic",
@@ -106,10 +158,9 @@ export const SEED_GALLERY: GallerySeedItem[] = [
   },
   {
     id: "g-post-aathi",
-    imageUrl: "/images/courses/advanced-aari.jpg",
+    imageUrl: "/images/gallery/studentwork-1.webp",
     category: "Student Ateliers",
-    caption:
-      "Handcrafted heritage ensembles and bridal blouse styling by certified alumni atelier.",
+    caption: "Student Atelier Showcase",
     postUrl: "https://www.instagram.com/aathi_nathi_vibes/p/De_JAW9EYNp/",
     instagramHandle: "@aathi_nathi_vibes",
     authorName: "Aathi Nathi Vibes",
@@ -117,10 +168,9 @@ export const SEED_GALLERY: GallerySeedItem[] = [
   },
   {
     id: "g-post-dhiyash",
-    imageUrl: "/images/courses/designer-patterns.jpg",
+    imageUrl: "/images/gallery/fashionshow-2.webp",
     category: "Student Ateliers",
-    caption:
-      "Signature festive silhouettes and volume gown structures from Dhiyash Designs boutique studio.",
+    caption: "Student Atelier Showcase",
     postUrl: "https://www.instagram.com/dhiyash_designs/p/De9v7DEGFen/",
     instagramHandle: "@dhiyash_designs",
     authorName: "Dhiyash Designs",
@@ -128,63 +178,13 @@ export const SEED_GALLERY: GallerySeedItem[] = [
   },
   {
     id: "g-post-clar",
-    imageUrl: "/images/courses/diploma-fashion.jpg",
+    imageUrl: "/images/gallery/photoshoot-1.webp",
     category: "Student Ateliers",
-    caption:
-      "Avant-garde runway aesthetics, conceptual drape geometry, and editorial fashion portfolio.",
+    caption: "Student Atelier Showcase",
     postUrl: "https://www.instagram.com/_justclar_/p/De8xqU3k_E1/",
     instagramHandle: "@_justclar_",
     authorName: "Just Clar",
     isInstagramPost: true,
-  },
-  {
-    id: "g-founder-couture",
-    imageUrl: "/images/founder_saree.png",
-    category: "Bridal Blouses",
-    caption:
-      "Royal hand-embroidered blouse with heritage mandala motif and metallic antique embellishments.",
-  },
-  {
-    id: "g-master-tailoring",
-    imageUrl: "/images/courses/master-tailoring.jpg",
-    category: "Bridal Blouses",
-    caption:
-      "Boutique-standard bridal blouse drafting with flawless seam finishing and zero-wrinkle fitting.",
-  },
-  {
-    id: "g-advanced-aari",
-    imageUrl: "/images/courses/advanced-aari.jpg",
-    category: "Aari Embroidery",
-    caption:
-      "79-stitch bridal Aari embroidery showcase featuring gold zardozi wire and cutdana bead padding.",
-  },
-  {
-    id: "g-hand-embroidery",
-    imageUrl: "/images/courses/hand-embroidery.jpg",
-    category: "Aari Embroidery",
-    caption:
-      "Timeless heritage hand embroidery and metallic zardozi detailing on rich silk velvet.",
-  },
-  {
-    id: "g-designer-patterns",
-    imageUrl: "/images/courses/designer-patterns.jpg",
-    category: "Couture Gowns",
-    caption:
-      "High-fashion architectural silhouette gown with volume flare and structured bodice.",
-  },
-  {
-    id: "g-terracotta-jewellery",
-    imageUrl: "/images/courses/terracotta-jewellery.jpg",
-    category: "Terracotta",
-    caption:
-      "Handcrafted terracotta designer necklace set with antique acrylic glazing and hollow beads.",
-  },
-  {
-    id: "g-diploma-fashion",
-    imageUrl: "/images/courses/diploma-fashion.jpg",
-    category: "Student Fests",
-    caption:
-      "Student runway sketching and live mannequin draping during our annual design showcase.",
   },
 ];
 

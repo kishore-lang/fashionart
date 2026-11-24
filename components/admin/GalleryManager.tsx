@@ -31,7 +31,7 @@ export function GalleryManager({ initialGallery }: GalleryManagerProps) {
   const [imageUrl, setImageUrl] = useState(
     "https://images.unsplash.com/photo-1583391733956-3750e0ff4e8b?auto=format&fit=crop&w=800&q=80"
   );
-  const [category, setCategory] = useState<GalleryItemInput["category"]>("Bridal Blouses");
+  const [category, setCategory] = useState<GalleryItemInput["category"]>("Fashion Show");
   const [caption, setCaption] = useState("");
 
   const handleDelete = (id: string) => {
@@ -186,8 +186,12 @@ export function GalleryManager({ initialGallery }: GalleryManagerProps) {
                   }
                   className="w-full px-3.5 py-2 text-xs rounded-xl border border-[#4A2511]/20 focus:ring-2 focus:ring-[#E8B520]/40 focus:outline-none"
                 >
-                  <option value="Bridal Blouses">Bridal Blouses</option>
+                  <option value="Fashion Show">Fashion Show</option>
+                  <option value="Students Works">Students Works</option>
+                  <option value="Photo Shoot">Photo Shoot</option>
+                  <option value="Convocation">Convocation</option>
                   <option value="Couture Gowns">Couture Gowns</option>
+                  <option value="Bridal Blouses">Bridal Blouses</option>
                   <option value="Aari Embroidery">Aari Embroidery</option>
                   <option value="Terracotta">Terracotta</option>
                   <option value="Student Fests">Student Fests</option>
